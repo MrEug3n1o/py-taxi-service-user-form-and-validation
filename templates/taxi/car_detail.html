@@ -6,7 +6,7 @@
   </h1>
   <p>Manufacturer: ({{ car.manufacturer.name }}, {{ car.manufacturer.country }})</p>
   <h1>Drivers
-    <form action="{% url 'taxi:car-add-remove-drive' car.id %}" method="post">
+    <form action="{% url 'taxi:car-add-remove-driver' car.id %}" method="post">
       {% csrf_token %}
       {% if user in car.drivers.all %}
         <input

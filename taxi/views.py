@@ -76,6 +76,7 @@ class CarUpdateView(LoginRequiredMixin, generic.UpdateView):
     form_class = CarForm
     success_url = reverse_lazy("taxi:car-list")
 
+
 @login_required
 def car_add_or_remove_driver(
         request: HttpRequest,
@@ -97,12 +98,12 @@ class CarDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 
 class DriverListView(LoginRequiredMixin, generic.ListView):
-    model = Driver
+    model = get_user_model()
     paginate_by = 5
 
 
 class DriverDetailView(LoginRequiredMixin, generic.DetailView):
-    model = Driver
+    model = get_user_model()
     queryset = Driver.objects.all().prefetch_related("cars__manufacturer")
 
 
