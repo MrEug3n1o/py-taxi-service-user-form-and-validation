@@ -9,17 +9,17 @@ from taxi.models import Driver, Car
 class DriverCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
-        model = Driver
-        fields = UserCreationForm.Meta.fields + ("license_number")
+        model = get_user_model()
+        fields = UserCreationForm.Meta.fields + "license_number"
 
 
 class DriverLicenseUpdateForm(forms.ModelForm):
     class Meta:
-        model = Driver
+        model = get_user_model()
         fields = "license_number"
 
         def clean_license_number(self):
-            license_number = self.clean_data["license_number"]
+            license_number = self.self.cleaned_data["license_number"]
             pattern = r"^[A-Z]{3}\d{5}$"
             if not re.match(pattern, license_number):
                 raise forms.ValidationError("Wrong license number!")
