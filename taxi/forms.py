@@ -23,14 +23,14 @@ class DriverCreationForm(UserCreationForm):
 class DriverLicenseUpdateForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = "license_number"
+        fields = ("license_number",)
 
-        def clean_license_number(self):
-            license_number = self.cleaned_data["license_number"]
-            pattern = r"^[A-Z]{3}\d{5}$"
-            if not re.match(pattern, license_number):
-                raise forms.ValidationError("Wrong license number!")
-            return license_number
+    def clean_license_number(self):
+        license_number = self.cleaned_data["license_number"]
+        pattern = r"^[A-Z]{3}\d{5}$"
+        if not re.match(pattern, license_number):
+            raise forms.ValidationError("Wrong license number!")
+        return license_number
 
 
 class CarForm(forms.ModelForm):
